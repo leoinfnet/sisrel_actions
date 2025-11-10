@@ -10,7 +10,7 @@ jobs:
       with:
         python-version: '3.13'
     - name: Checkout do codigo
-      uses: actions/checkout@4
+      uses: actions/checkout@v4
     - name: List
       run: ls -ll
 
