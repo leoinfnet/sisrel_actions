@@ -3,9 +3,9 @@ on: [push]
   
 jobs: 
   build:
-  runs-on: ubuntu-latest
-  steps:
-  - name: Install Python
-    uses: actions/setup-python@v6
-    with:
-      python-version: '3.13'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.13'
