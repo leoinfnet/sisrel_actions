@@ -1,5 +1,5 @@
 name: Hello Actions
-on: [workflow_dispatch,push]
+on: [workflow_dispatch]
 jobs:
   say-hello:
     runs-on: ubuntu-latest
