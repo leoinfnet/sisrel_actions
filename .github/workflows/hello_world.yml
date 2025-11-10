@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Say Hello
-      run: echo "Olá, GH actions" 
+      run: echo "Olá, GH actions ${{github.repository}}  - ${{github.actor}} - ${{github.ref}} - ${{github.sha}} - ${{github.event_name}}" 
 
 
 
@@ -16,3 +16,6 @@ jobs:
 # toda segunda meia noite => 0 0 * * 1
 # dia 1 de cada mes as 3 -> 0 3 1 * * 
 # Todo dia as 9 e 17 -0> 0 9,17 * * *  
+
+## github.repository -> nome repositorio github.actor -> commiter, github.ref -> branch  
+# github.sha -> hash do com,mot , github.event_name => evento que iniciou a action
