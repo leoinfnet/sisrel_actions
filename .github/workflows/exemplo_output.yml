@@ -15,3 +15,6 @@ jobs:
         run: |
           echo "Mensagem: ${{steps.gerar.outputs.valor_teste}}"
 
+      - name: Step 3 usar a saida num condicional
+        if: ${{steps.gerar.outputs.numero == '2'}}
+        run: echo "a saida era 2 mesmo!"
