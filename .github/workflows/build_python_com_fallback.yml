@@ -1,9 +1,6 @@
-name: Build Python
+name: Build Python 2
 on: [workflow_dispatch]
-#on:
-#  schedule:
-#    - cron: "50 23 * * *"
-  
+
 jobs: 
   build:
     runs-on: ubuntu-latest
@@ -20,17 +17,22 @@ jobs:
       run: | 
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
-      run: pytest -v > resultado_teste.txt
-
-    - name: Sucesso
-      if: ${{ success() }}
-      run: echo "Todos os steps deram sucesso"
     
-    - name: Erro
-      if: ${{ failure() }}
-      run: "Falhou"
-
+    - name: Run Tests
+      id: tests
+      continue-on-error: true
+      run: pytest -v > resultado_teste.txt
+    
+    - name: Verificar resultado do Pytest
+      run: |
+        if [ "${{steps.tests.outcome}}" == "failure" ]; then
+          echo: "O step 'test' falhou"
+        else 
+          echo "O Step rodou!"
+        fi
+    - name: Forcar falha se pytest falhar
+      if: ${{ steps.tests.outcome == 'failure'}}
+      run: exit 1
   
     - name: Upload File
       if: ${{ always() }}
