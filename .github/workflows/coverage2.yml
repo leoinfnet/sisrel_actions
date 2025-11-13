@@ -69,4 +69,4 @@ jobs:
 
             git add .
             git commit -am "Atualiza a badge de cobertura: ${{ steps.badge.outputs.cobertura || '' }}"
-            git push origin master
+            git push origin docs
