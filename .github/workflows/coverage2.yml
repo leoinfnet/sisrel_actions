@@ -41,10 +41,14 @@ jobs:
               echo "percent=${PERCENT}" >> $GITHUB_OUTPUT
               echo "color=${COLOR}" >> $GITHUB_OUTPUT
 
+
         - name: Gerar coverage.json
           run: |
             PERCENT='${{ steps.coverage_data.outpts.percent }}'
             COLOR='${{ steps.coverage_data.outpts.color }}'
+            
+            echo "Gerando coverage.json com ${PERCENT}% e cor ${COLOR}"
+
             cat > coverage.json << EOF
             {
               "schemaVersion": 1,
