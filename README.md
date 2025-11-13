@@ -49,7 +49,10 @@ Status do build:
 
 Badge de cobertura (futuro):
 
+Antigo:
+![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/leoinfnet/sisrel_actions/master/coverage_antigo.json)
 
+novo:
 ![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/leoinfnet/sisrel_actions/master/coverage.json)
 
 ------------------------------------------------------------
