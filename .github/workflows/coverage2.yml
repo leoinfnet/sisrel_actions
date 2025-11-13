@@ -44,8 +44,8 @@ jobs:
 
         - name: Gerar coverage.json
           run: |
-            PERCENT='${{ steps.coverage_data.outpts.percent }}'
-            COLOR='${{ steps.coverage_data.outpts.color }}'
+            PERCENT='${{ steps.coverage_data.outputs.percent }}'
+            COLOR='${{ steps.coverage_data.outputs.color }}'
             
             echo "Gerando coverage.json com ${PERCENT}% e cor ${COLOR}"
 
