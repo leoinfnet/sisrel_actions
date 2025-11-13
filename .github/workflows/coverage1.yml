@@ -1,6 +1,8 @@
 name: CI com badge estático
 
 on: [push]
+permissions:
+  contents: write
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -28,6 +30,7 @@ jobs:
               PERCENT=$(python -c "print(int(float('${COVERAGE}')*100))")
 
               echo "Cobertura: ${PERCENT}%"
+              echo "cobertura=${PERCENT}" >> $GITHUB_OUTPUT
 
               # Define cor conforme o nível (HEX válido)
               if   [ "${PERCENT}" -ge 90 ]; then COLOR="#4c1";      # brightgreen
@@ -61,3 +64,13 @@ jobs:
           with:
             name: badge-cobertura
             path: coverage-badge.svg
+        - name: Commit e Push do Badge
+          if: ${{ success() }}
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            git add coverage-badge.svg
+            git add .
+            git commit -am "Atualiza a badge de cobertura: ${{step.badge.outputs.cobertura || ''}}"
+            git push origin master
