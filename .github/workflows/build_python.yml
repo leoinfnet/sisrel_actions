@@ -1,8 +1,8 @@
 name: Build Python
-#on: [workflow_dispatch]
-on:
-  schedule:
-    - cron: "50 23 * * *"
+on: [push]
+#on:
+#  schedule:
+#    - cron: "50 23 * * *"
   
 jobs: 
   build:
