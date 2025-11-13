@@ -1,5 +1,8 @@
 name: Build Python
-on: [workflow_dispatch]
+#on: [workflow_dispatch]
+on:
+  schedule:
+    - cron: "50 23 * * *"
   
 jobs: 
   build:
@@ -23,12 +26,12 @@ jobs:
     - name: Sucesso
       if: ${{ success() }}
       run: echo "Todos os steps deram sucesso"
+    
     - name: Erro
       if: ${{ failure() }}
       run: "Falhou"
 
-    
-
+  
     - name: Upload File
       if: ${{ always() }}
       uses: actions/upload-artifact@v4   
