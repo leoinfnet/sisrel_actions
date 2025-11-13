@@ -1,0 +1,28 @@
+name: Hello Actions
+on: [workflow_dispatch]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Say Hello
+      run: echo "Olá, GH actions ${{github.repository}}  - ${{github.actor}} - ${{github.ref}} - ${{github.sha}} - ${{github.event_name}}" 
+    - name: Generate File 
+      run: echo "Ultimo build feito por ${{github.actor}} em $(date)" > status.txt
+    - name: Upload File
+      uses: actions/upload-artifact@v4   
+      with:
+        name: status
+        path: status.txt
+
+
+# * * * * * UTC 
+# 09-00am  ->> 0 9 * * * 
+# A Cada 6 horas ->> 0 */6 * * *  
+# A Cada 15 Minutos -> */15 * * * * 
+# toda segunda meia noite => 0 0 * * 1
+# dia 1 de cada mes as 3 -> 0 3 1 * * 
+# Todo dia as 9 e 17 -0> 0 9,17 * * *  
+
+## github.repository -> nome repositorio github.actor -> commiter, github.ref -> branch  
+# github.sha -> hash do com,mot , github.event_name => evento que iniciou a action
