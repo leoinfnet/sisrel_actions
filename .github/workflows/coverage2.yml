@@ -53,7 +53,7 @@ jobs:
             {
               "schemaVersion": 1,
               "label": "coverage",
-              "message": "${PERCENT}%"
+              "message": "${PERCENT} %"
               "color": "${COLOR}"
             }
             EOF
