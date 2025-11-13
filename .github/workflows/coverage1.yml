@@ -28,7 +28,7 @@ jobs:
 
             echo "Cobertura: ${PERCENT} %"
 
-            #Define a cor 
+            # Define a cor 
             if   [ "${PERCENT}" -ge 90 ]; then COLOR="#4c1";      # brightgreen
             elif [ "${PERCENT}" -ge 75 ]; then COLOR="#97ca00";   # green
             elif [ "${PERCENT}" -ge 50 ]; then COLOR="#dfb317";   # yellow
