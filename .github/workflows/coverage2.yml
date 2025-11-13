@@ -38,8 +38,8 @@ jobs:
               else                             COLOR="#e05d44";     # red
               fi
 
-              echo "percent=${PERCENT}" >> $GITHUB_OUTPUT
-              echo "color=${COLOR}" >> $GITHUB_OUTPUT
+              echo "percent=${PERCENT}" >> "$GITHUB_OUTPUT"
+              echo "color=${COLOR}" >> "$GITHUB_OUTPUT"
 
 
         - name: Gerar coverage.json
