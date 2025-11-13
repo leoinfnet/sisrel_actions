@@ -29,7 +29,7 @@ jobs:
     
     - name: Erro
       if: ${{ failure() }}
-      run: "Falhou"
+      run: exit 1
 
   
     - name: Upload File
