@@ -16,7 +16,7 @@ jobs:
         path: status.txt
     - name: Teste
       run: |
-       docker ps 
+       docker run ubuntu echo teste 
 
 
 # * * * * * UTC 
