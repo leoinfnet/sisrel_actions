@@ -39,6 +39,9 @@ Status do build:
 ![HELLO_WORD](https://img.shields.io/github/actions/workflow/status/leoinfnet/sisrel_actions/hello_world.yml?branch=master&label=build)
 
 
+![BUILD](https://img.shields.io/github/actions/workflow/status/leoinfnet/sisrel_actions/build_python.yml?branch=master&label=build)
+
+
 ------------------------------------------------------------
 ## 🧪 Testes e Cobertura
 
