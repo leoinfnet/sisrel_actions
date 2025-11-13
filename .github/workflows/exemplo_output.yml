@@ -1,5 +1,5 @@
 name: Exemplo de Output
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   exemplo1:

@@ -36,7 +36,8 @@ on: [push, pull_request]
 
 Status do build:
 
-https://img.shields.io/github/actions/workflow/status/SEU_USUARIO/SEU_REPOSITORIO/ci.yml?branch=main&label=build
+![HELLO_WORD](https://img.shields.io/github/actions/workflow/status/leoinfnet/sisrel_actions/hello_world.yml?branch=master&label=build)
+
 
 ------------------------------------------------------------
 ## 🧪 Testes e Cobertura
