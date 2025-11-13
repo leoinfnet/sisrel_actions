@@ -1,6 +1,6 @@
 name: CI com badge estático
 
-on: [workflow_dispatch,push]
+on: [workflow_dispatch]
 permissions:
   contents: write
 jobs:
