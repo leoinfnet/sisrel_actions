@@ -1,6 +1,6 @@
 name: CI com badge estático
 
-on: [workflow_dispatch]
+on: [push]
 permissions:
   contents: write
 jobs:
@@ -22,15 +22,14 @@ jobs:
 
         - name: Rodar testes com cobertura
           run: pytest -v --cov=sisrel --cov-report=xml:coverage.xml
-        - name: Gerar Badge estatico de cobertura
-          id: badge
+        - name: Calcular Cobertura e Cor
+          id: coverage_data
           run: |
              # Extrai o valor da cobertura (0.x) do coverage.xml
               COVERAGE=$(grep -oPm1 '(?<=line-rate=")[^"]+' coverage.xml)
               PERCENT=$(python -c "print(int(float('${COVERAGE}')*100))")
 
               echo "Cobertura: ${PERCENT}%"
-              echo "cobertura=${PERCENT}" >> $GITHUB_OUTPUT
 
               # Define cor conforme o nível (HEX válido)
               if   [ "${PERCENT}" -ge 90 ]; then COLOR="#4c1";      # brightgreen
@@ -39,38 +38,31 @@ jobs:
               else                             COLOR="#e05d44";     # red
               fi
 
-              echo "Cor usada no badge: ${COLOR}"
-              cat > coverage-badge.svg <<SVG
-              <svg xmlns="http://www.w3.org/2000/svg" width="110" height="20" role="img" aria-label="coverage: ${PERCENT}%">
-              <linearGradient id="a" x2="0" y2="100%">
-                <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-                <stop offset="1" stop-opacity=".1"/>
-              </linearGradient>
-              <rect rx="3" width="110" height="20" fill="#555"/>
-              <rect rx="3" x="60" width="50" height="20" fill="${COLOR}"/>
-              <path fill="${COLOR}" d="M60 0h4v20h-4z"/>
-              <rect rx="3" width="110" height="20" fill="url(#a)"/>
-              <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-                <text x="30" y="15" fill="#010101" fill-opacity=".3">coverage</text>
-                <text x="30" y="14">coverage</text>
-                <text x="85" y="15" fill="#010101" fill-opacity=".3">${PERCENT}%</text>
-                <text x="85" y="14">${PERCENT}%</text>
-              </g>
-              </svg>
-              SVG
+              echo "percent=${PERCENT}" >> $GITHUB_OUTPUT
+              echo "color=${COLOR}" >> $GITHUB_OUTPUT
 
-        - name: Fazer Upload
-          uses: actions/upload-artifact@v4
-          with:
-            name: badge-cobertura
-            path: coverage-badge.svg
+        - name: Gerar coverage.json
+          run: |
+            PERCENT='${{ steps.coverage_data.outpts.percent }}'
+            COLOR='${{ steps.coverage_data.outpts.color }}'
+            cat > coverage.json << EOF
+            {
+              "schemaVersion": 1,
+              "label": "coverage",
+              "message": "${PERCENT}"
+              "color": "${COLOR}"
+            }
+            EOF
+            echo: "Conteudo do coverage.json"
+            cat coverage.json
+
+      
         - name: Commit e Push do Badge
           if: ${{ success() }}
           run: |
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
 
-            git add coverage-badge.svg
             git add .
             git commit -am "Atualiza a badge de cobertura: ${{ steps.badge.outputs.cobertura || '' }}"
             git push origin master
