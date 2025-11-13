@@ -53,7 +53,7 @@ jobs:
               "color": "${COLOR}"
             }
             EOF
-            echo: "Conteudo do coverage.json"
+            echo "Conteudo do coverage.json"
             cat coverage.json
 
       
