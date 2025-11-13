@@ -26,5 +26,13 @@ jobs:
             COVERAGE=$(grep -oPm1 '(?<=line-rate=")[^"]+' coverage.xml)
             PERCENT=$(python -c "print(int(float('${COVERAGE}')*100))")
 
-            echo "Cobertura: ${PERCENT} "
+            echo "Cobertura: ${PERCENT} %"
 
+            #Define a cor 
+            if [ "${PERCENT}" -ge 90]; then COLOR="#4c1";
+            elif [ "${PERCENT}" -ge 75] then COLOR="#97ca00";
+            elif [ "${PERCENT}" -ge 75 ]; then COLOR="#97ca00";   # green
+            elif [ "${PERCENT}" -ge 50 ]; then COLOR="#dfb317";   # yellow
+            else                             COLOR="#e05d44";     # red
+
+            echo "Cor usada no badge: ${COLOR}"
